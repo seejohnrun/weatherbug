@@ -8,6 +8,8 @@ module Weatherbug
   require 'weatherbug/hash_methods'
   require 'weatherbug/transformable_data'
   autoload :Station, 'weatherbug/station'
+  autoload :LiveObservation, 'weatherbug/live_observation'
+  autoload :NoSuchStationException, 'weatherbug/no_such_station_exception'
 
   API_URL = 'datafeed.weatherbug.com'
 
@@ -45,6 +47,17 @@ module Weatherbug
     response = make_request('StationInfo', params)
 
     Weatherbug::Station.from_document response.xpath('/aws:weather/aws:station').first
+  end
+
+  def self.live_observation(station, unit_type = :f)
+    station_id = station.is_a?(Weatherbug::Station) ? station.station_id : station
+    params = {'StationId' => station_id}
+    params['UnitType'] = '1' if unit_type == :c
+    response = make_request('LiveObservations', params)
+
+    live_observation = Weatherbug::LiveObservation.from_document response.xpath('/aws:weather/aws:ob').first
+    live_observation.send(:station_reference=, station) if station.is_a?(Weatherbug::Station)
+    live_observation
   end
 
   private
