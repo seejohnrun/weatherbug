@@ -6,7 +6,6 @@ spec = Gem::Specification.new do |s|
   s.author = 'John Crepezzi'
   s.add_development_dependency('rspec')
   s.add_dependency('nokogiri')
-  s.add_dependency('open-uri')
   s.description = 'Light Wrapper for the WeatherBug partner API'
   s.email = 'john.crepezzi@patch.com'
   s.files = Dir['lib/**/*.rb']
