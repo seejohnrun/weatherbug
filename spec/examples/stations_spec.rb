@@ -62,8 +62,14 @@ describe Weatherbug::Station do
     lobs.temp_units.should == '&deg;C'
   end
 
-  it 'should be able to make a round trip and not have to hit the api twice' do
+  it 'should be able to make a round trip and not have to hit the api twice - live observation' do
     @station.live_observation.station.object_id.should == @station.object_id
+  end
+
+  it 'should be able to retrieve a forecast for a station' do
+    forecasts = @station.forecast
+    forecasts.length.should > 0
+    forecasts.each { |f| f.should be_a(Weatherbug::Forecast) }
   end
 
 end

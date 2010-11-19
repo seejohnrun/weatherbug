@@ -8,8 +8,9 @@ module Weatherbug
   require 'weatherbug/hash_methods'
   require 'weatherbug/transformable_data'
   autoload :Station, 'weatherbug/station'
+  autoload :StationHint, 'weatherbug/station_hint'
   autoload :LiveObservation, 'weatherbug/live_observation'
-  autoload :NoSuchStationException, 'weatherbug/no_such_station_exception'
+  autoload :Forecast, 'weatherbug/forecast'
 
   API_URL = 'datafeed.weatherbug.com'
 
@@ -60,7 +61,45 @@ module Weatherbug
     live_observation
   end
 
+  # Get the list of stations in a bounding box
+  # Does not return full stations
+  def self.stations_in_box(top_right_lat, top_right_lng, bot_left_lat, bot_left_lng)
+    params = {
+      'LatitudeTopRight' => top_right_lat,
+      'LongitudeTopRight' => top_right_lng,
+      'LatitudeBottomLeft' => bot_left_lat,
+      'LongitudeBottomLeft' => bot_left_lng
+    }
+    response = make_request('StationListByLatLng', params)
+    
+    station_data = response.xpath('/aws:weather/aws:stations/aws:station')
+    return nil unless station_data 
+
+    station_data.map do |sdata|
+      Weatherbug::StationHint.from_document(sdata)
+    end
+  end
+
+  def self.forecast(options)
+    self.retrieve_forecast(1, options)
+  end
+
   private
+
+  # TODO add validation for fields
+  def self.retrieve_forecast(forecast_type, options)
+    HashMethods.valid_keys(options, [:latitude, :longitude])
+    params = HashMethods.convert_symbols(options)
+    params['ForecastType'] = forecast_type
+    response = make_request(options.has_key?(:longitude) ? 'ClosestForecastByLatLng' : 'Forecast', params)
+
+    forecast_data = response.xpath('/aws:weather/aws:forecasts/aws:forecast')
+    return nil unless forecast_data
+
+    forecast_data.map do |fdata|
+      Weatherbug::Forecast.from_document(fdata)
+    end
+  end
 
   # Make the actual request, unwrap it and send it back
   # Handles errors that may come up

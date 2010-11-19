@@ -117,3 +117,23 @@ describe Weatherbug, :live_observation do
   end
 
 end
+
+describe Weatherbug, :forecast do
+
+  it 'should be able to get a forecast by lat/lng' do
+    forecasts = Weatherbug::forecast(:latitude => 39.095, :longitude => -77.783)
+    forecasts.length.should > 0
+    forecasts.each { |f| f.should be_a(Weatherbug::Forecast) }
+  end
+
+end
+
+describe Weatherbug, :stations_in_box do
+
+  it 'should be able to get a list of station hints by bounding box' do
+    station_hints = Weatherbug::stations_in_box(67.609, -18.413, -7.71, -137.153)
+    station_hints.length.should > 0
+    station_hints.each { |f| f.should be_a(Weatherbug::StationHint) }
+  end
+
+end

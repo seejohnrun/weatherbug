@@ -6,6 +6,7 @@ module Weatherbug
 
     def self.register_transformer(name, options = {})
       @transformers ||= {}
+      options[:name] = name.split(/[:@]/).last.gsub('-', '_').to_sym unless options.has_key?(:name)
       private; attr_writer options[:name]
       public;  attr_reader options[:name]
       @transformers[name] = options
@@ -15,9 +16,6 @@ module Weatherbug
       object = self.new
       @transformers.each do |key, options|
         value = document.xpath(key).text
-        puts value if key == 'aws:station-id' && value.empty?
-        # If this thing is not optional, blow up on us
-        raise ArgumentError.new("Required value missing from API: #{key}") if options.has_key?(:required) && options[:required] && (value.nil? || value.empty?)
         # If this thing is empty, skip it
         next if value.nil?
         # If this thing needs to be transformed, transform it (from a string)

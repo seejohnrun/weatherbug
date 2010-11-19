@@ -6,7 +6,9 @@ module Weatherbug
       :zip_code => 'ZipCode',
       :city_code => 'CityCode',
       :postal_code => 'PostalCode',
-      :include_pws => 'IncludePWS'
+      :include_pws => 'IncludePWS',
+      :latitude => 'Latitude',
+      :longitude => 'Longitude'
     }
 
     # Raise an argument error if we get invalid keys at all

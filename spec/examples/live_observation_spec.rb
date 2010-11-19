@@ -7,8 +7,9 @@ describe Weatherbug::LiveObservation do
   end
 
   it 'should have the fields that live observations should have' do
-    [:temp_high, :temp_low].each { |k| @live_observation.send(k).should be_a(Fixnum) }
-    [:station_id, :temp_units].each { |k| @live_observation.send(k).should be_a(String) }
+    [:dew_point, :elevation, :feels_like, :humidity, :temp_high, :temp_low, :wind_speed].each { |k| @live_observation.send(k).should be_a(Fixnum) }
+    [:station_id, :wind_direction, :temp_units, :station_name].each { |k| @live_observation.send(k).should be_a(String) }
+    [:pressure].each { |k| @live_observation.send(k).should be_a(Float) }
   end
 
   it 'should be able to take a live observation and get its city' do
