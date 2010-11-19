@@ -16,11 +16,13 @@ You can do some cool things with stations:
 
 ### TODO
 
-* Expand the README
+* Expand the README to actually be useful
+* Add more functionality
+* Make RDOC friendly
 
 ### Author
 
-* John Crepezzi
+* John Crepezzi (@seejohnrun)
 
 ### LICENSE
 
