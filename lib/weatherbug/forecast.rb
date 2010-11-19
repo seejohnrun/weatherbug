@@ -13,6 +13,20 @@ module WeatherBug
     register_transformer 'aws:hi/@units', :name => :temp_units
     register_transformer 'aws:prob-of-precip', :name => :probability_of_precipitation
 
+    def date 
+      date ||= begin
+        key = title.split[0] # Remove 'night'
+        return Date.today if key == 'Today' || key == 'Tonight'
+        return Date.today + 1 if key == 'Tomorrow'
+        # Figure out how far forward to go
+        return nil unless appropriate_wday_index = Date::DAYNAMES.index(key)
+        today_index = Date.today.wday
+
+        distance = appropriate_wday_index - today_index
+        Date.today + (distance > 0 ? distance : distance + 7)
+      end
+    end
+
   end
 
 end

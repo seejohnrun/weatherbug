@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
+require 'date'
 
 module WeatherBug
 
@@ -13,7 +14,6 @@ module WeatherBug
   autoload :Forecast, 'weatherbug/forecast'
 
   API_URL = 'datafeed.weatherbug.com'
-
 
   # Set your application's partner ID 
   def self.partner_id=(partner_id)
