@@ -1,4 +1,4 @@
-module Weatherbug
+module WeatherBug
 
   class Station < TransformableData
 
@@ -21,11 +21,11 @@ module Weatherbug
     end
 
     def live_observation(unit = :f)
-      Weatherbug.live_observation(self, unit)
+      WeatherBug.live_observation(self, unit)
     end
 
     def forecast
-      Weatherbug.forecast(:latitude => latitude, :longitude => longitude)
+      WeatherBug.forecast(:latitude => latitude, :longitude => longitude)
     end
 
   end

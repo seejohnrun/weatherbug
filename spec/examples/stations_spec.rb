@@ -1,15 +1,15 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Weatherbug::Station do
+describe WeatherBug::Station do
 
   before(:all) do
-    @station_from_zip = Weatherbug::closest_station(:zip_code => '08005')
-    @station_from_zip.should be_a(Weatherbug::Station)
+    @station_from_zip = WeatherBug::closest_station(:zip_code => '08005')
+    @station_from_zip.should be_a(WeatherBug::Station)
   end
 
   before(:all) do
-    @station_from_city_code = Weatherbug::closest_station(:city_code => 65355)
-    @station_from_city_code.should be_a(Weatherbug::Station)
+    @station_from_city_code = WeatherBug::closest_station(:city_code => 65355)
+    @station_from_city_code.should be_a(WeatherBug::Station)
   end
 
   before(:all) do
@@ -28,7 +28,7 @@ describe Weatherbug::Station do
   end
 
   it 'should have the fields that US stations should have' do
-    station = Weatherbug.get_station('AWSHQ')
+    station = WeatherBug.get_station('AWSHQ')
     station.station_id.should == 'AWSHQ'
     station.name.should == 'WeatherBug Headquarters'
     station.city.should == 'Germantown'
@@ -40,7 +40,7 @@ describe Weatherbug::Station do
   end
 
   it 'should have the fields that international stations should have' do
-    station = Weatherbug.get_station('SBMO')
+    station = WeatherBug.get_station('SBMO')
     station.station_id.should == 'SBMO'
     station.name.should == 'Maceio (Campo Palmar)'
     station.city.should == 'Maceio'
@@ -53,12 +53,12 @@ describe Weatherbug::Station do
 
   it 'should be able to retrieve a live observation for a station' do
     lobs = @station.live_observation
-    lobs.should be_a(Weatherbug::LiveObservation)
+    lobs.should be_a(WeatherBug::LiveObservation)
   end
 
   it 'should be able to retrieve a celcius observation for a station' do
     lobs = @station.live_observation(:c)
-    lobs.should be_a(Weatherbug::LiveObservation)
+    lobs.should be_a(WeatherBug::LiveObservation)
     lobs.temp_units.should == '&deg;C'
   end
 
@@ -69,7 +69,7 @@ describe Weatherbug::Station do
   it 'should be able to retrieve a forecast for a station' do
     forecasts = @station.forecast
     forecasts.length.should > 0
-    forecasts.each { |f| f.should be_a(Weatherbug::Forecast) }
+    forecasts.each { |f| f.should be_a(WeatherBug::Forecast) }
   end
 
 end

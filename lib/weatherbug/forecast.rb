@@ -1,4 +1,4 @@
-module Weatherbug
+module WeatherBug
 
   class Forecast < TransformableData
 

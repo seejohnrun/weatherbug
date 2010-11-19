@@ -1,7 +1,7 @@
-module Weatherbug
+module WeatherBug
   
   # This is a super-convenient class for transorming data and requiring things in the 
-  # different associated Weatherbug data classes
+  # different associated WeatherBug data classes
   class TransformableData
 
     def self.register_transformer(name, options = {})

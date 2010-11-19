@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Weatherbug::Forecast do
+describe WeatherBug::Forecast do
 
   before(:all) do
-    @forecast = Weatherbug.forecast(:latitude => 39.095, :longitude => -77.783).first
+    @forecast = WeatherBug.forecast(:latitude => 39.095, :longitude => -77.783).first
   end
 
   it 'should have the fields that forecasts have' do

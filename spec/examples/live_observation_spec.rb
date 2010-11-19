@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Weatherbug::LiveObservation do
+describe WeatherBug::LiveObservation do
 
   before(:all) do
-    @live_observation = Weatherbug::live_observation('AWSHQ')
+    @live_observation = WeatherBug::live_observation('AWSHQ')
   end
 
   it 'should have the fields that live observations should have' do
@@ -13,7 +13,7 @@ describe Weatherbug::LiveObservation do
   end
 
   it 'should be able to take a live observation and get its city' do
-    @live_observation.station.should be_a(Weatherbug::Station)
+    @live_observation.station.should be_a(WeatherBug::Station)
   end
 
 end

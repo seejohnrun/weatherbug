@@ -1,4 +1,4 @@
-module Weatherbug
+module WeatherBug
 
   class LiveObservation < TransformableData
 
@@ -22,7 +22,7 @@ module Weatherbug
     end
 
     def station
-      @station_reference ||= Weatherbug.get_station(self.station_id)
+      @station_reference ||= WeatherBug.get_station(self.station_id)
     end
 
     private

@@ -1,4 +1,4 @@
-module Weatherbug
+module WeatherBug
 
   class StationHint < TransformableData
 
@@ -6,7 +6,7 @@ module Weatherbug
     register_transformer '@name'
 
     def station
-      @station ||= Weatherbug.get_station(station_id)
+      @station ||= WeatherBug.get_station(station_id)
     end
 
   end
