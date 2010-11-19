@@ -26,6 +26,7 @@ module WeatherBug
     HashMethods.valid_one_only(lookup_options, [:zip_code, :city_code])
     HashMethods.valid_one_only(lookup_options, [:postal_code, :city_code])
     HashMethods.valid_needs(lookup_options, :zip_code, :postal_code) if lookup_options.has_key?(:postal_code)
+    lookup_options[:include_pws] = '1' if lookup_options.has_key?(:include_pws)
     response = make_request('StationList', HashMethods.convert_symbols(lookup_options))
 
     response.xpath('/aws:weather/aws:station').map { |station| WeatherBug::Station.from_document(station) }
@@ -38,6 +39,7 @@ module WeatherBug
     HashMethods.valid_needs(lookup_options, :zip_code, :postal_code) if lookup_options.has_key?(:postal_code)
     params = HashMethods.convert_symbols(lookup_options)
     params['ListType'] = '1'
+    lookup_options[:include_pws] = '1' if lookup_options.has_key?(:include_pws)
     response = make_request('StationList', params)
 
     WeatherBug::Station.from_document response.xpath('/aws:weather/aws:station').first 
