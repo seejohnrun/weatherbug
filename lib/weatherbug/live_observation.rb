@@ -14,6 +14,8 @@ module WeatherBug
     register_transformer 'aws:wind-direction'
     register_transformer 'aws:wind-speed', :transform => :to_i
     register_transformer 'aws:pressure', :transform => :to_f
+    register_transformer 'aws:description'
+    register_transformer 'aws:image/@icon', :name => :icon
 
     def self.from_document(document)
       lops = super

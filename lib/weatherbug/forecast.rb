@@ -5,7 +5,7 @@ module WeatherBug
     register_transformer 'aws:title', :required => true   
     register_transformer 'aws:city'
     register_transformer 'aws:short-title'
-    register_transformer 'aws:icon'
+    register_transformer 'aws:icon/@icon'
     register_transformer 'aws:description'
     register_transformer 'aws:prediction'
     register_transformer 'aws:lo', :name => :temp_low, :transform => :to_i

@@ -39,13 +39,13 @@ describe WeatherBug, :nearby_stations do
   end
 
   it 'should give different results when including pws' do
-    stations1 = WeatherBug::nearby_stations(:zip_code => '10012')
-    stations2 = WeatherBug::nearby_stations(:zip_code => '10012', :include_pws => true)
+    stations1 = WeatherBug::nearby_stations(:zip_code => '08005')
+    stations2 = WeatherBug::nearby_stations(:zip_code => '08005', :include_pws => true)
 
     s1hash = stations1.map { |s| s.station_id }.sort.join('/')
     s2hash = stations2.map { |s| s.station_id }.sort.join('/')
 
-    s1hash.should != s2hash
+    s1hash.should_not == s2hash
   end
 
 end

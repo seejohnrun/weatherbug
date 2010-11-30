@@ -56,6 +56,7 @@ module WeatherBug
     station_id = station.is_a?(WeatherBug::Station) ? station.station_id : station
     params = {'StationId' => station_id}
     params['UnitType'] = '1' if unit_type == :c
+    params['ShowIcon'] = '1'
     response = make_request('LiveObservations', params)
 
     live_observation = WeatherBug::LiveObservation.from_document response.xpath('/aws:weather/aws:ob').first
