@@ -10,6 +10,7 @@ describe WeatherBug::Forecast do
     [:title, :short_title, :description, :prediction, :temp_units, :probability_of_precipitation, :icon].each { |k| @forecast.send(k).should be_a(String) }
     [:temp_high, :temp_low].each { |k| @forecast.send(k).should be_a(Fixnum) }
     [:date].each { |k| @forecast.send(k).should be_a(Date) }
+    [:condition].each { |k| @forecast.send(k).should be_a(Symbol) }
     @forecast.temp_units.should == '°F'
   end
 

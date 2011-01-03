@@ -8,6 +8,8 @@ This is a Ruby interface for the Weatherbug Partner API.  It does not cover the 
 
     stations = WeatherBug::nearest_stations(:zip_code => '10012')
     station = WeatherBug::closest_station(:zip_code => '08005')
+		station = WeatherBug::get_station(station_id)
+    stations = WeatherBug::stations_in_box(tr_lat, tr_lng, bl_lat, bl_lng)
 
 You can do some cool things with stations:
 
