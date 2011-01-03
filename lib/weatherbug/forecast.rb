@@ -8,8 +8,8 @@ module WeatherBug
     register_transformer 'aws:icon/@icon'
     register_transformer 'aws:description'
     register_transformer 'aws:prediction'
-    register_transformer 'aws:lo', :name => :temp_low, :transform => :to_i
-    register_transformer 'aws:hi', :name => :temp_high, :transform => :to_i
+    register_transformer 'aws:lo', :name => :temp_low, :transform => :nil_safe_to_i
+    register_transformer 'aws:hi', :name => :temp_high, :transform => :nil_safe_to_i
     register_transformer 'aws:hi/@units', :name => :temp_units
     register_transformer 'aws:prob-of-precip', :name => :probability_of_precipitation
 

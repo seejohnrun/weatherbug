@@ -8,9 +8,8 @@ describe WeatherBug::Forecast do
 
   it 'should have the fields that forecasts have' do
     [:title, :short_title, :description, :prediction, :temp_units, :probability_of_precipitation, :icon].each { |k| @forecast.send(k).should be_a(String) }
-    [:temp_high, :temp_low].each { |k| @forecast.send(k).should be_a(Fixnum) }
+    [:temp_high, :temp_low].each { |k| @forecast.send(k).should_not == 0 }
     [:date].each { |k| @forecast.send(k).should be_a(Date) }
-    [:condition].each { |k| @forecast.send(k).should be_a(Symbol) }
     @forecast.temp_units.should == '°F'
   end
 
