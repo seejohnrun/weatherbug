@@ -84,7 +84,7 @@ module WeatherBug
   end
 
   def self.forecast(options)
-    self.retrieve_forecast(1, options)
+    self.retrieve_forecast(7, options)
   end
 
   private
