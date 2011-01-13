@@ -7,7 +7,7 @@ describe WeatherBug::LiveObservation do
   end
 
   it 'should have the fields that live observations should have' do
-    [:dew_point, :elevation, :feels_like, :humidity, :temp_high, :temp_low, :wind_speed].each { |k| @live_observation.send(k).should be_a(Fixnum) }
+    [:dew_point, :elevation, :feels_like, :humidity, :temp_high, :temp_low, :wind_speed, :temp].each { |k| @live_observation.send(k).should be_a(Fixnum) }
     [:station_id, :wind_direction, :temp_units, :station_name, :description, :icon].each { |k| @live_observation.send(k).should be_a(String) }
     [:pressure].each { |k| @live_observation.send(k).should be_a(Float) }
   end
@@ -22,6 +22,11 @@ describe WeatherBug::LiveObservation do
 
   it 'should be able to get an icon from a live observation' do
     @live_observation.icon.length.should > 0
+  end
+
+  it 'should not get a 0 feels_like' do
+    @station = WeatherBug::closest_station(:zip_code => '06470')
+    @station.live_observation.temp.should be_a(Fixnum)
   end
 
 end
