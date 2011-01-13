@@ -1,7 +1,7 @@
 require 'spec/rake/spectask'
 require 'lib/weatherbug/version'
  
-task :build => :test do
+task :build  do
   system "gem build weatherbug.gemspec"
 end
 
