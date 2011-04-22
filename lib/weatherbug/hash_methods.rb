@@ -8,7 +8,7 @@ module WeatherBug
       :postal_code => 'PostalCode',
       :include_pws => 'IncludePWS',
       :latitude => 'Latitude',
-      :longitude => 'Longitude'
+      :longitude => 'Longitude',
     }
 
     # Raise an argument error if we get invalid keys at all

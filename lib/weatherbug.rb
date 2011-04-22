@@ -12,6 +12,7 @@ module WeatherBug
   autoload :StationHint, 'weatherbug/station_hint'
   autoload :LiveObservation, 'weatherbug/live_observation'
   autoload :Forecast, 'weatherbug/forecast'
+  autoload :Link, 'weatherbug/link'
 
   API_URL = 'datafeed.weatherbug.com'
 
@@ -50,6 +51,20 @@ module WeatherBug
     response = make_request('StationInfo', params)
 
     WeatherBug::Station.from_document response.xpath('/aws:weather/aws:station').first
+  end
+
+  # Get links for a certain zip code or postal code
+  def self.get_links(link_names = [], lookup_options = {})
+    HashMethods.valid_keys(lookup_options, [:zip_code, :postal_code])
+    HashMethods.valid_one_only(lookup_options, [:zip_code, :postal_code])
+    HashMethods.valid_needs(lookup_options, :zip_code, :postal_code) if lookup_options.has_key?(:postal_code)
+    params = HashMethods.convert_symbols(lookup_options)
+    params['LinkName'] = link_names.is_a?(Array) ? link_names.join(',') : link_names
+    response = make_request('GetLink', params)
+
+    response.xpath('/aws:weather/aws:Links/aws:Link').map do |link_data|
+      WeatherBug::Link.from_document link_data
+    end
   end
 
   def self.live_observation(station, unit_type = :f)

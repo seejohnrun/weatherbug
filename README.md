@@ -11,6 +11,10 @@ This is a Ruby interface for the Weatherbug Partner API.  It does not cover the 
     station = WeatherBug::get_station(station_id)
     stations = WeatherBug::stations_in_box(tr_lat, tr_lng, bl_lat, bl_lng)
 
+Get links for WeatherBug pages for a given zip code
+
+    links = WeatherBug::get_links('home', :zip_code => '08005')
+
 You can do some cool things with stations:
 
     station.live_observation
