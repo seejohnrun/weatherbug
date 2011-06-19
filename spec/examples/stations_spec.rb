@@ -8,7 +8,7 @@ describe WeatherBug::Station do
   end
 
   before(:all) do
-    @station_from_city_code = WeatherBug::closest_station(:city_code => 65355)
+    @station_from_city_code = WeatherBug::closest_station(:city_code => 15735)
     @station_from_city_code.should be_a(WeatherBug::Station)
   end
 
