@@ -1,4 +1,4 @@
-require 'lib/weatherbug/version'
+require File.dirname(__FILE__) + '/lib/weatherbug/version'
 
 spec = Gem::Specification.new do |s|
   
