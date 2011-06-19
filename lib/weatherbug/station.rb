@@ -16,7 +16,7 @@ module WeatherBug
 
     def self.from_document(document)
       station = super
-      raise ArgumentError.new('No such station') if station.station_id.empty?
+      raise NoSuchStation, 'No such station' if station.station_id.empty?
       station
     end
 

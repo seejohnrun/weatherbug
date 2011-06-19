@@ -16,6 +16,9 @@ module WeatherBug
 
   API_URL = 'datafeed.weatherbug.com'
 
+  Error = Class.new(RuntimeError)
+  NoSuchStation = Class.new(Error)
+
   # Set your application's partner ID 
   def self.partner_id=(partner_id)
     @partner_id = partner_id
@@ -125,7 +128,7 @@ module WeatherBug
     params['RequestType'] = method
     params['PartnerId'] = @partner_id
     data = open("http://#{API_URL}/GetXml.aspx?#{params.map { |k, v| "#{k}=#{v}" }.join('&')}")
-    raise Exception.new("Unexpected exception - empty response") unless data
+    raise Error.new("Unexpected exception - empty response") unless data
     Nokogiri::XML(data)
   end
 

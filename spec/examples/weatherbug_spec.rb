@@ -98,7 +98,7 @@ describe WeatherBug, :get_station do
   it 'should get nothing when requesting an invalid station' do
     lambda do
       station = WeatherBug::get_station('fake')
-    end.should raise_error(ArgumentError)
+    end.should raise_error(WeatherBug::NoSuchStation)
   end
 
 end
@@ -113,7 +113,7 @@ describe WeatherBug, :live_observation do
   it 'should get no result when getting live observations for a non-existent station' do
     lambda do
       lops = WeatherBug::live_observation('fake')
-    end.should raise_error(ArgumentError)
+    end.should raise_error(WeatherBug::NoSuchStation)
   end
 
   it 'should be able to get live observations for a station in F degrees' do
